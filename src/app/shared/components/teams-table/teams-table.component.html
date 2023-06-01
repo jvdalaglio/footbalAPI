@@ -1,0 +1,4 @@
+<div *ngFor="let team of teams; let i = index">
+  <img (click)="getPlayersByTeam(i)" [src]="team.team.logo" alt="">
+  <p> {{team.team.name}} </p>
+</div>
