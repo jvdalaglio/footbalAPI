@@ -12,26 +12,48 @@ export class HomeComponent {
   players: any;
   campeonato: any;
   playersPage: number = 1;
+  leagues: any;
+  selectedLeague: any;
+  selectedCountry: any;
+  selectedSeason: any;
+  countries: any;
+  seasons: number[] = [2023, 2022, 2021, 2020, 2019, 2018]
 
   constructor(
     private apiService: ApiService,
     private router: Router
   ) {
-    this.getBrasileirao()
-    this.getTeams();
-  }
-
-  getBrasileirao() {
-    this.apiService.getLeagues().subscribe({
-      next: res => this.campeonato = res.response[4]
-    })
+    this.getCountries();
   }
 
   getTeams() {
-    this.apiService.getByLeague('teams', 140, 2022).subscribe({
+    this.apiService.getByLeague('teams', this.selectedLeague, 2023).subscribe({
       next: res => {
         this.teams = res.response
-        console.log(this.teams)
+        if(this.teams.length == 0) {
+          alert('Não há times cadastrados para este campeonato')
+        }
+      }
+    })
+  }
+
+  getCountries() {
+    this.apiService.getCountries().subscribe({
+      next: (res: any) => {
+        this.countries = res.response
+        console.log(this.countries)
+      }
+    })
+  }
+
+  getModel() {
+    console.log(this.selectedLeague)
+  }
+
+  getLeagues() {
+    this.apiService.getLeagues(this.selectedCountry, this.selectedSeason).subscribe({
+      next: res => {
+        this.leagues = res.response
       }
     })
   }
@@ -39,5 +61,12 @@ export class HomeComponent {
   openTeamDetails(index: number) {
     const id = this.teams[index].team.id
     this.router.navigate([`details/${id}`])
+  }
+
+  refresh() {
+    this.selectedCountry = undefined;
+    this.selectedLeague = undefined;
+    this.selectedSeason = undefined;
+    this.getTeams();
   }
 }
