@@ -1,29 +1,36 @@
-<mat-form-field>
-  <mat-label>Selecione o pais</mat-label>
-  <mat-select [(ngModel)]="selectedCountry">
-    <mat-option *ngFor="let country of countries" [value]="country.name" (click)="isSelected()">
-      {{country.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Selecione o ano</mat-label>
-  <mat-select [(ngModel)]="selectedSeason">
-    <mat-option *ngFor="let season of seasons" [value]="season" (click)="isSelected()">
-      {{season}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Selecione a liga</mat-label>
-  <mat-select [(ngModel)]="selectedLeague">
-    <mat-option *ngFor="let league of leagues" [value]="league.league.id">
-      {{league.league.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button (click)="getTeams()">BUSCAR</button>
-<button (click)="refresh()">LIMPAR</button>
+<app-header></app-header>
+<div class="form-section">
+  <div class="form-container">
+    <mat-form-field>
+      <mat-label>Selecione o pais</mat-label>
+      <mat-select [(ngModel)]="selectedCountry">
+        <mat-option *ngFor="let country of countries" [value]="country.name" (click)="isSelected()">
+          {{country.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Selecione o ano</mat-label>
+      <mat-select [(ngModel)]="selectedSeason">
+        <mat-option *ngFor="let season of seasons" [value]="season" (click)="isSelected()">
+          {{season}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Selecione a liga</mat-label>
+      <mat-select [(ngModel)]="selectedLeague" [disabled]="isDisabled">
+        <mat-option *ngFor="let league of leagues" [value]="league.league.id">
+          {{league.league.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="form-buttons">
+    <button (click)="getTeams()">BUSCAR</button>
+    <button (click)="refresh()">LIMPAR</button>
+  </div>
+</div>
 <app-teams-table
   [teams]="teams"
   (teamEvent)="openTeamDetails($event)"

@@ -9,7 +9,8 @@ export class ApiService {
   private apiUrl = 'https://v3.football.api-sports.io'
   private apiKey = '075ebc7b473d2b03a316c5c5b4bb4f98'
   // private apiKey = '31666190df4f0dff36d9c5d298c3d6d1',
-  // private apiKey = '1f51f9d6aa40446cf02a77e322d0b74d'
+  // private apiKey = '1f51f9d6aa40446cf02a77e322d0b74d',
+  // private apiKey = '2490bc9fafb1ea356c1a5f0f73d8897a'
 
   private headers: {} = {
     "headers": {

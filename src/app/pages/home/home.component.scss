@@ -1,0 +1,17 @@
+:host {
+  .form-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 3%;
+  }
+  .form-container {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    gap: 5%;
+  }
+  .mat-mdc-form-field {
+    width: 50%;
+  }
+}

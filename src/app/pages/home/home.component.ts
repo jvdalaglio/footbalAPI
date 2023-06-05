@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   selectedSeason: any;
   countries: any;
   seasons: number[] = [2023, 2022, 2021, 2020, 2019, 2018]
+  isDisabled: boolean = true;
 
   constructor(
     private apiService: ApiService,
@@ -29,9 +30,10 @@ export class HomeComponent implements OnInit {
   }
 
   getTeams() {
-    this.apiService.getByLeague('teams', this.selectedLeague, 2023).subscribe({
+    this.apiService.getByLeague('teams', this.selectedLeague, this.selectedSeason).subscribe({
       next: res => {
         this.teams = res.response
+        console.log(this.teams)
       }
     })
   }
@@ -66,7 +68,9 @@ export class HomeComponent implements OnInit {
   }
 
   isSelected() {
+
     if(this.selectedCountry && this.selectedSeason) {
+      this.isDisabled = false
       this.getLeagues();
     }
   }
