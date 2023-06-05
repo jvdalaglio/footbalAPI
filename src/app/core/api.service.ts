@@ -19,8 +19,12 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
-  getLeagues(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/leagues`, this.headers )
+  getLeagues(country: string, season: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/leagues?country=${country}&season=${season}`, this.headers )
+  }
+
+  getCountries() {
+    return this.http.get(`${this.apiUrl}/countries`, this.headers)
   }
 
   getByLeague(type?: string, leagueId?: number, leagueSeason?: number, page?:number, team?: number): Observable<any> {

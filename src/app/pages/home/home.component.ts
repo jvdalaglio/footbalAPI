@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
 
@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/core/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   teams: any;
   players: any;
   campeonato: any;
@@ -22,7 +22,9 @@ export class HomeComponent {
   constructor(
     private apiService: ApiService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.getCountries();
   }
 
@@ -30,9 +32,6 @@ export class HomeComponent {
     this.apiService.getByLeague('teams', this.selectedLeague, 2023).subscribe({
       next: res => {
         this.teams = res.response
-        if(this.teams.length == 0) {
-          alert('Não há times cadastrados para este campeonato')
-        }
       }
     })
   }
@@ -46,14 +45,10 @@ export class HomeComponent {
     })
   }
 
-  getModel() {
-    console.log(this.selectedLeague)
-  }
-
   getLeagues() {
     this.apiService.getLeagues(this.selectedCountry, this.selectedSeason).subscribe({
       next: res => {
-        this.leagues = res.response
+          this.leagues = res.response
       }
     })
   }
@@ -68,5 +63,11 @@ export class HomeComponent {
     this.selectedLeague = undefined;
     this.selectedSeason = undefined;
     this.getTeams();
+  }
+
+  selected() {
+    if(this.selectedCountry && this.selectedSeason) {
+      this.getLeagues();
+    }
   }
 }
