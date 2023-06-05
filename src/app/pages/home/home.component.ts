@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
     this.getTeams();
   }
 
-  selected() {
+  isSelected() {
     if(this.selectedCountry && this.selectedSeason) {
       this.getLeagues();
     }

@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = 'https://v3.football.api-sports.io'
-  private apiKey = '31666190df4f0dff36d9c5d298c3d6d1'
+  private apiKey = '075ebc7b473d2b03a316c5c5b4bb4f98'
+  // private apiKey = '31666190df4f0dff36d9c5d298c3d6d1',
+  // private apiKey = '1f51f9d6aa40446cf02a77e322d0b74d'
+
   private headers: {} = {
     "headers": {
       "x-rapidapi-host": "v3.football.api-sports.io",

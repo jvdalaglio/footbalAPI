@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>Selecione o pais</mat-label>
   <mat-select [(ngModel)]="selectedCountry">
-    <mat-option *ngFor="let country of countries" [value]="country.name" (click)="selected()">
+    <mat-option *ngFor="let country of countries" [value]="country.name" (click)="isSelected()">
       {{country.name}}
     </mat-option>
   </mat-select>
@@ -9,7 +9,7 @@
 <mat-form-field>
   <mat-label>Selecione o ano</mat-label>
   <mat-select [(ngModel)]="selectedSeason">
-    <mat-option *ngFor="let season of seasons" [value]="season" (click)="selected()">
+    <mat-option *ngFor="let season of seasons" [value]="season" (click)="isSelected()">
       {{season}}
     </mat-option>
   </mat-select>
@@ -24,4 +24,7 @@
 </mat-form-field>
 <button (click)="getTeams()">BUSCAR</button>
 <button (click)="refresh()">LIMPAR</button>
-<app-teams-table [teams]="teams" (teamEvent)="openTeamDetails($event)"></app-teams-table>
+<app-teams-table
+  [teams]="teams"
+  (teamEvent)="openTeamDetails($event)"
+></app-teams-table>
